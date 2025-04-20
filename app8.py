@@ -6,10 +6,8 @@ from keras.models import load_model
 from PIL import Image
 import time
 
-# --- Page Config ---
 st.set_page_config(page_title="🚭 Smart Smoking Detection", page_icon="🚬", layout="wide")
 
-# --- Custom CSS for Styling ---
 st.markdown("""
     <style>
     /* App background */
@@ -62,7 +60,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- Load Model ---
 @st.cache_resource
 def load_smoking_model():
     try:
@@ -74,7 +71,7 @@ def load_smoking_model():
 model = load_smoking_model()
 categories = ['Not_Smoking', 'Smoking']
 
-# --- Prediction ---
+
 def predict_smoking(img):
     try:
         gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -94,12 +91,11 @@ def predict_smoking(img):
 def play_alert_sound():
     winsound.Beep(1000, 300)
 
-# --- Sidebar Navigation ---
+
 st.sidebar.title("🚦 Navigation")
 page = st.sidebar.radio("Go to", ["🏠 Home", "🧠 Smoking Detection"])
 sound_alert = st.sidebar.checkbox("🔊 Enable Sound Alert", value=True)
 
-# --- Home Page ---
 if page == "🏠 Home":
     st.markdown('<div class="smoke-title"> Smart Smoking Detection 🚭</div><br>', unsafe_allow_html=True)
     st.markdown("### 🔍 Detect smoking in real-time using deep learning.", unsafe_allow_html=True)
@@ -121,7 +117,7 @@ if page == "🏠 Home":
         """, unsafe_allow_html=True)
         st.info("👈 Use the sidebar to start detection!")
 
-# --- Detection Page ---
+
 elif page == "🧠 Smoking Detection":
     st.markdown('<div class="smoke-title">🧪 Real-Time Detection Zone</div>', unsafe_allow_html=True)
     method = st.radio("Choose Detection Method:", ["📷 Upload an Image", "📹 Use Webcam"])
